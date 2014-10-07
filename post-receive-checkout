@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# A hook script for the post-receive event
+# It checks out the source to the working dir
+
+cd ..
+GIT_DIR='.git'
+git reset --hard HEAD
+echo "repo updated at $(pwd)!"
+
