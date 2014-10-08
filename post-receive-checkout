@@ -2,6 +2,7 @@
 #
 # A hook script for the post-receive event
 # It checks out the source to the working dir
+# It neeeds the following config: receive.denyCurrentBranch = warn
 
 cd ..
 GIT_DIR='.git'
