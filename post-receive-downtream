@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# A hook script for the post-receive event
+# It pushes changes downstream
+
+DOWNSTREAM_REMOTE="downstream"
+DOWNSTREAM_BRANCH="master"
+
+git push $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH
+
+echo "repo pushed down to $DOWNSTREAM_BRANCH!"
+
