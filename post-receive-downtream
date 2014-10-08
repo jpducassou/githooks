@@ -3,10 +3,18 @@
 # A hook script for the post-receive event
 # It pushes changes downstream
 
-DOWNSTREAM_REMOTE="downstream"
+DOWNSTREAM_REMOTE="origin"
 DOWNSTREAM_BRANCH="master"
 
-git push $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH
+DOWNSTREAM_PATH=$(git config hooks.downstream)
 
-echo "repo pushed down to $DOWNSTREAM_BRANCH!"
+if [ -z "$DOWNSTREAM_PATH" ]; then
+	echo "hooks.downstream not set. Quiting."
+	exit 1
+fi
+
+cd  $DOWNSTREAM_PATH
+git pull $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH
+
+echo "repo pushed down to $DOWNSTREAM_PATH!"
 
