@@ -4,8 +4,17 @@
 # It checks out the source to the working dir
 # It neeeds the following config: receive.denyCurrentBranch = warn
 
-cd ..
-GIT_DIR='.git'
+# To keep a separate working directory just add the following config:
+# [core]
+#     bare = false
+#     worktree = /webroot/dir/for/this/repo
+
+set -x
+
+# cd ..
+# GIT_DIR='.git'
+cd "$GIT_WORK_TREE"
 git reset --hard HEAD
-echo "repo updated at $(pwd)!"
+# echo "repo updated at $(pwd)!"
+echo "repo updated at <$GIT_WORK_TREE>"
 
