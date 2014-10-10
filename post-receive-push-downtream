@@ -6,6 +6,11 @@
 DOWNSTREAM_REMOTE="origin"
 DOWNSTREAM_BRANCH="master"
 
+DEBUG=$(git config hooks.downstream)
+if [ -n "$DEBUG" ]; then
+	set -x
+fi
+
 DOWNSTREAM_PATH=$(git config hooks.downstream)
 
 if [ -z "$DOWNSTREAM_PATH" ]; then
@@ -13,7 +18,7 @@ if [ -z "$DOWNSTREAM_PATH" ]; then
 	exit 1
 fi
 
-cd  $DOWNSTREAM_PATH
+cd "$DOWNSTREAM_PATH"
 git pull $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH
 
 echo "repo pushed down to $DOWNSTREAM_PATH!"
