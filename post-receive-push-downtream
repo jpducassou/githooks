@@ -19,6 +19,9 @@ if [ -z "$DOWNSTREAM_PATH" ]; then
 fi
 
 cd "$DOWNSTREAM_PATH"
+export GIT_DIR="$DOWNSTREAM_PATH/.git"
+export GIT_WORK_TREE="$DOWNSTREAM_PATH"
+
 git pull $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH
 
 echo "repo pushed down to $DOWNSTREAM_PATH!"
