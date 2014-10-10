@@ -9,12 +9,29 @@
 #     bare = false
 #     worktree = /webroot/dir/for/this/repo
 
-set -x
+DEBUG=$(git config hooks.debug)
+if [ -n "$DEBUG" ]; then
+	set -x
+fi
 
-# cd ..
-# GIT_DIR='.git'
+# quit if bare
+if [ $(git config core.bare) == "true" ]; then
+	exit 0
+fi
+
+export GIT_DIR=$(pwd)
+
+WORK_DIR=$(git config core.worktree)
+if [ -n "$WORK_DIR" ]; then
+	export GIT_WORK_TREE="$WORK_DIR"
+else
+	export GIT_WORK_TREE=".."
+fi
+
 cd "$GIT_WORK_TREE"
-git reset --hard HEAD
-# echo "repo updated at $(pwd)!"
-echo "repo updated at <$GIT_WORK_TREE>"
+git --git-dir="$GIT_DIR" reset --hard HEAD
+
+echo "repo updated at '$(pwd)'"
+
+
 
