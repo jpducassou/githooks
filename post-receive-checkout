@@ -33,5 +33,3 @@ git --git-dir="$GIT_DIR" reset --hard HEAD
 
 echo "repo updated at '$(pwd)'"
 
-
-
