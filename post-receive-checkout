@@ -29,6 +29,8 @@ else
 fi
 
 cd "$GIT_WORK_TREE"
-git --git-dir="$GIT_DIR" reset --hard HEAD
+GIT_WORK_TREE=$(pwd)
+git --git-dir="$GIT_DIR" --work-tree="$GIT_WORK_TREE" reset --hard HEAD
 
-echo "repo updated at '$(pwd)'"
+echo "repo updated at '$GIT_WORK_TREE'"
+
